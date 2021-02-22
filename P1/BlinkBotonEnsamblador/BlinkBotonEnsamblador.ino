@@ -7,29 +7,29 @@ void loop()
 {
 asm (
 "inicio: \n\t"
-"sbrc 0x05,0x06 \n\t" //Salto si el sexto bit es 0, del registro B
-"call f1 \n\t" //Fue 1, está pulsado el botón, llamo a la subrutina con frecuencia de 1Hz
-"sbrs 0x05,0x06 \n\t" //Salto si el sexto bit es 1
-"call f5 \n\t" //Es 0, llama a la subrutina con frecuencia .5Hz
+"SBIS 0x05,0x06 \n\t" //Salto si el sexto bit es 0, del registro B
+"jmp f5 \n\t" //Fue 1, está pulsado el botón, llamo a la subrutina con frecuencia de 1Hz
+"SBIC 0x05,0x06 \n\t" //Salto si el sexto bit es 1
+"jmp f1 \n\t" //Es 0, llama a la subrutina con frecuencia .5Hz
 "jmp main \n\t" //Regreso al inicio
 
 "f1: \n\t" //Subrutina 1
 "sbi 0x05,0x07 \n\t"  //Prendo el LED
-"LDI r22, 45 \n\t" //Tarda 1 segundo
+"LDI r22, 245 \n\t" //Tarda 1 segundo
 "call tiempo \n\t" //Llamo al contador
 "cbi 0x05,0x07 \n\t" //Apago el LED
-"LDI r22, 45 \n\t"
+"LDI r22, 245 \n\t"
 "call tiempo \n\t" //Llamo al contador
-"ret \n\t"
+"jmp main \n\t"
 
 "f5: \n\t" //Subrutina 2
 "sbi 0x05,0x07 \n\t"  //Prendo el LED
-"LDI r22, 22 \n\t" //Cargo el contador para tardar medio segundo
+"LDI r22, 90 \n\t" //Cargo el contador para tardar medio segundo
 "call tiempo \n\t" //Llamo al contador
 "cbi 0x05,0x07 \n\t" //Apago el LED
-"LDI r22, 23 \n\t"
+"LDI r22, 90 \n\t"
 "call tiempo \n\t" //Llamo al contador
-"ret \n\t"
+"jmp main \n\t"
 
 "tiempo: \n\t"
 "LOOP_3: \n\t"

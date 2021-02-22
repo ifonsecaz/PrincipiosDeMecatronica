@@ -15,5 +15,5 @@ void loop() {
   posServo=map(val,0,1023,0,180);
 
   myservo.write(posServo);
-  delay(500); //Espero medio segundo
+  //delay(500); //Espero medio segundo
 }

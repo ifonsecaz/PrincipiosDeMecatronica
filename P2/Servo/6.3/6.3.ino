@@ -6,6 +6,7 @@ int val = 0;// variable to read the value from the analog pin
 int analogPin = A0;
 float volt = 0; //Voltaje a mostrar
 int posServo=0;
+int posAnt=0;
 
 void setup() {
   lcd.begin(16, 2);
@@ -17,16 +18,22 @@ void loop() {
   volt=(float(val)*5)/1024; //Lo convertimos a voltaje
 
   posServo=map(val,0,1023,0,180);
-
+  
   myservo.write(posServo);
 
-  lcd.setCursor(1, 0);
-  lcd.print("Voltaje: ");
-  lcd.print(volt);
-
-  lcd.setCursor(2,0);
-  lcd.print("Ángulo: ");
-  lcd.print(posServo);
+  if(posAnt!=posServo){
+    lcd.setCursor(9,1);
+    lcd.print("   ");
+    
+    lcd.setCursor(1, 0);
+    lcd.print("Voltaje: ");
+    lcd.print(volt);
   
-  delay(500); //Espero medio segundo
+    lcd.setCursor(1, 1);
+    lcd.print("Angulo: ");
+    lcd.print(posServo);
+  }
+  //delay(200); //Espero medio segundo
+  //lcd.clear();
+  posAnt=posServo;
 }

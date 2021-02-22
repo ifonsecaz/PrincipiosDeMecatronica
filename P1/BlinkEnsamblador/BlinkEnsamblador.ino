@@ -1,6 +1,6 @@
 void setup()
 {
-DDRB = DDRB | PB7; // Ó B10000000, elige el séptimo bit del puerto B
+DDRB = DDRB | B10000000; // elige el séptimo bit del puerto B
 }
 void loop()
 {

@@ -12,9 +12,9 @@ void loop() {
   val = analogRead(analogPin);// read the input pin
   volt=(float(val)*5)/1024;
   
-  analogWrite(13,(val*255)/1024);
+  analogWrite(13,(float(val)*255)/1024);
   
   Serial.print ("El voltaje analógico es: ");
-  Serial.println(volt);// debug value}
+  Serial.println(volt);// debug value
   //delay(1000); //Espero un segundo
 }
