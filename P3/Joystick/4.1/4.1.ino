@@ -1,38 +1,34 @@
-#include <LiquidCrystal.h>  // include the library code:
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);// initialize the interface pins
-int analogPin0 = A0;
-int analogPin1 = A1;
-float valX;
-float valY;
+
+int analogPin0 = A2;
+int analogPin1 = A3;
+int valX;
+int valY;
 float posX=0;
 float posY=0;
-float graph;
+float posAntX=0;
+float posAntY=0;
+int boton=0;
 
 void setup() {
-  lcd.begin(16, 2);
   Serial.begin(9600);//  setup serial
+  pinMode(3,INPUT);
 }
 
 void loop() {
-  valX=analogRead(analogPin0); //Checar si A0 es X o Y
+  valX=analogRead(analogPin0); 
   valY=analogRead(analogPin1);
 
-  posX=valX; //Cambiar
-  posY=valY;
+  posX=(((float(valX)*2)/1023)-1);
+  posY=(((float(valY)*2)/1023)-1);
 
-  lcd.setCursor(1, 0);
-  lcd.print("X: ");
-  lcd.print(posX);
 
-  lcd.setCursor(2, 0);
-  lcd.print("Y: ");
-  lcd.print(posY);
+  Serial.println(String(posX) + "," + String(posY));
 
-  graph=posY*posX;
-  Serial.println(graph);
-
-  //Para cada eje
-  Serial.println(posY);
-
-  Serial.println(posX);
+  //Serial.println(String(posX*posY));
+  
+  //boton=digitalRead(3);
+  //Serial.print("       Botón: ");
+  //Serial.println(boton);
+  
+  delay(100);
 }
