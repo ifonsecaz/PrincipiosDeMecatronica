@@ -16,14 +16,17 @@ void loop() {
 
   float Z_out=analogRead(zpin);
 
-  float  Xg=((X_out*5)/1024-1.65)/0.330;
-  float Yg=((Y_out*5)/1024-1.65)/0.330;
-  float Zg=((Z_out*5)/1024-1.65)/0.330;
-  Serial.print(Xg); //print x value on serial monitor
+  float  Xg=-1*((X_out*5)/1024-1.65)/0.330;
+  float Yg=-1*((Y_out*5)/1024-1.65)/0.330;
+  float Zg=-1*((Z_out*5)/1024-1.65)/0.330;
+  Serial.print("X: ");
+  Serial.print(Xg); 
   Serial.print("\t");
-  Serial.print(Yg); //print y value on serial monitor
+  Serial.print("Y: ");
+  Serial.print(Yg); 
   Serial.print("\t");
-  Serial.print(Zg); //print z value on serial monitor
+  Serial.print("Zg: ");
+  Serial.print(Zg); 
   Serial.print("\n");
 
   float  roll = ( ( (atan2(Yg,Zg) * 180) / 3.14 ) + 180 );

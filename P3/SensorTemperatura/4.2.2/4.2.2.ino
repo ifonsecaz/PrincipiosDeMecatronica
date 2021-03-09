@@ -14,8 +14,7 @@ void loop() {
   
   volt=((float(lect)*5)/1023);
   
-  
-  C=volt/.01;
+  C=volt/.1;
     
   lcd.setCursor(0, 0);
   lcd.print("Temperatura ");

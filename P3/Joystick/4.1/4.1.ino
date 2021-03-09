@@ -23,12 +23,10 @@ void loop() {
 
 
   Serial.println(String(posX) + "," + String(posY));
-
-  //Serial.println(String(posX*posY));
   
   //boton=digitalRead(3);
   //Serial.print("       Botón: ");
   //Serial.println(boton);
   
-  delay(100);
+  //delay(100);
 }
