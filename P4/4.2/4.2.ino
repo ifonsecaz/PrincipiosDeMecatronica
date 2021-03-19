@@ -2,7 +2,7 @@ int volt = 0;
 int lect=0;
 
 void setup() {
-  pinMode(13, OUTPUT);
+  pinMode(6, OUTPUT);
   pinMode(12, OUTPUT);
   pinMode(11, OUTPUT);
   pinMode(3, OUTPUT);
@@ -11,27 +11,29 @@ void setup() {
 
 void loop() {
   lect=analogRead(A3);
-
-  volt=(float(lect)*510)/1023-255;
-
-  digitalWrite(13,HIGH);
   
-  if(volt<0){ 
+  volt=map(lect,0,1023,-255,255);
+
+  analogWrite(6,abs(volt));
+  
+  digitalWrite(3,LOW); 
+  digitalWrite(2,LOW);
+  digitalWrite(12,LOW);
+  digitalWrite(11,LOW);
+  
+  if(volt>=0){ 
     digitalWrite(3, HIGH); 
-    digitalWrite(2,LOW);
-    analogWrite(11,0);
-    analogWrite(12,abs(volt));
+    digitalWrite(11,HIGH);
   }else{                      
-    if(volt>0){
-      digitalWrite(3,LOW);
-      digitalWrite(2,HIGH);
-      analogWrite(12,0);
-      analogWrite(11,volt);
-    }else{
-      digitalWrite(3,LOW);
-      digitalWrite(2,LOW);
-      analogWrite(12,0);
-      analogWrite(11,0);
-    }
+  digitalWrite(3,LOW);
+    digitalWrite(11,LOW);
+  }
+  
+  if(volt<=0){ 
+    digitalWrite(2, HIGH); 
+    digitalWrite(12,HIGH);
+  }else{                      
+  digitalWrite(2,LOW);
+    digitalWrite(12,LOW);
   }
 }
